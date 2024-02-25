@@ -12,9 +12,7 @@
                [formControl]="modelName"
                [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
-          @for (model of modelList; track model) {
-            <mat-option [value]="model">{{model}}</mat-option>
-          }
+            <mat-option  *ngFor="let model of modelList" [value]="model">{{ model }}</mat-option>
         </mat-autocomplete>
       </mat-form-field>
     </form>

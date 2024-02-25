@@ -2,25 +2,32 @@ import { MatInputModule } from '@angular/material/input';
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
-import { ListComponent } from './list/list.component';
 import { ModelDetailsComponent } from './model-details/model-details.component';
+import { ModelsListComponent } from './models-list/models-list.component';
+import { NgForOf } from "@angular/common";
 
 @Component({
   selector: 'app-collection',
   standalone: true,
   imports: [
     MatToolbarModule,
-    ListComponent,
+    ModelsListComponent,
     ModelDetailsComponent,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatAutocompleteModule],
+    MatAutocompleteModule,
+    NgForOf
+  ],
   templateUrl: './collection.component.html',
   styleUrl: './collection.component.scss'
 })

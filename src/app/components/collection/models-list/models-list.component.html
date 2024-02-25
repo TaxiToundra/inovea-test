@@ -1,0 +1,12 @@
+
+<!-- Change the list with the real datas from API -->
+<ul>
+    <li *ngFor="let model of modelsList">
+      <span class="date-model">Date : {{ model.date | frenchDate }}</span>
+      <mat-divider></mat-divider>
+      <div class="card-body">
+        <img [src]="'/assets/images/' + model.modelName + '.png'"  alt=""/>
+        <span>{{ model.name }}</span>
+      </div>
+    </li>
+</ul>

@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Model3D } from "../models/model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
 
-  private apiRoute = "https://inov-test-api.onrender.com/api";
+  private apiRoute: string = "https://inov-test-api.onrender.com/api";
+  private readonly modelsRoute: string = this.apiRoute + "/models";
 
   constructor(private http: HttpClient) { }
 
@@ -16,8 +18,8 @@ export class GlobalService {
     return this.http.get<string>(`${this.apiRoute}/ping`);
   }
 
-  //ADD GET LIST
-  getList() {
+  public getModelsList(): Observable<Model3D[]> {
+    return this.http.get<Model3D[]>(this.modelsRoute)
   }
 
   //ADD GET MODEL BY ID

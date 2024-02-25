@@ -10,7 +10,7 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class ModelDetailsComponent implements OnInit{
 
-  constructor(private globalService: GlobalService) { }
+  constructor(private readonly globalService: GlobalService) { }
 
   ngOnInit(): void {
   }
