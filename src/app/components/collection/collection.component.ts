@@ -12,6 +12,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { ModelDetailsComponent } from './model-details/model-details.component';
 import { ModelsListComponent } from './models-list/models-list.component';
 import { NgForOf } from "@angular/common";
+import { GlobalService } from "../../services/global.service";
+import {
+  Subject,
+  takeUntil
+} from "rxjs";
+import { Model3D } from "../../models/model";
 
 @Component({
   selector: 'app-collection',
@@ -34,5 +40,13 @@ import { NgForOf } from "@angular/common";
 export class CollectionComponent {
 
   modelName = new FormControl('');
-  modelList: string[] = ['Model 1', 'Model 2', 'Model 3', 'Model 4', 'Model 5'];
+  modelList: Model3D[] = [];
+
+  private destroy$ = new Subject<void>();
+
+  constructor(private readonly globalService: GlobalService) {
+    this.globalService.getModelsList().pipe(takeUntil(this.destroy$)).subscribe(list => {
+      this.modelList = list;
+    })
+  }
 }
