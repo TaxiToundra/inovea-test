@@ -2,18 +2,17 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit,
-  SimpleChanges
+  OnInit
 } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { NgForOf } from "@angular/common";
+import { NgForOf } from '@angular/common';
 import { GlobalService } from "../../../services/global.service";
 import {
   Subject,
   takeUntil
 } from "rxjs";
-import { Model3D } from "../../../models/model";
-import { FrenchDatePipe } from "../../../pipes/french-date.pipe";
+import { Model3D } from '../../../models/model';
+import { FrenchDatePipe } from '../../../pipes/french-date.pipe';
 
 @Component({
   selector: 'app-list',
