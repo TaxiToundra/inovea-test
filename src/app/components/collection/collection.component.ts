@@ -1,7 +1,8 @@
 import { MatInputModule } from '@angular/material/input';
 import {
   Component,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,6 +22,9 @@ import {
   takeUntil
 } from "rxjs";
 import { Model3D } from "../../models/model";
+import { MatDialog } from "@angular/material/dialog";
+import { ModelCreationDialogComponent } from "./model-creation-dialog/model-creation-dialog.component";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: 'app-collection',
@@ -35,26 +39,40 @@ import { Model3D } from "../../models/model";
     ReactiveFormsModule,
     MatIconModule,
     MatAutocompleteModule,
-    NgForOf
+    NgForOf,
+    MatButton
   ],
   templateUrl: './collection.component.html',
   styleUrl: './collection.component.scss'
 })
-export class CollectionComponent implements OnDestroy {
+export class CollectionComponent implements OnInit, OnDestroy {
 
   modelName = new FormControl('');
   modelList: Model3D[] = [];
 
   private destroy$ = new Subject<void>();
 
-  constructor(private readonly globalService: GlobalService) {
+  constructor(
+    private readonly globalService: GlobalService,
+    private readonly dialog: MatDialog
+  ) {  }
+
+  ngOnInit(): void {
     this.globalService.getModelsList().pipe(takeUntil(this.destroy$)).subscribe(list => {
       this.modelList = list;
+      this.globalService.setModelsList(list);
     })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  public openCreationDialog(): void {
+    this.dialog.open(ModelCreationDialogComponent, {
+      width: '30%',
+      minWidth: '350px'
+    });
   }
 }

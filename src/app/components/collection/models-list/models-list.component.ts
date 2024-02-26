@@ -6,7 +6,11 @@ import {
   OnInit
 } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { NgForOf } from '@angular/common';
+import {
+  NgForOf,
+  NgIf,
+  NgStyle
+} from '@angular/common';
 import { GlobalService } from "../../../services/global.service";
 import {
   Subject,
@@ -22,6 +26,8 @@ import { FrenchDatePipe } from '../../../pipes/french-date.pipe';
     MatDividerModule,
     NgForOf,
     FrenchDatePipe,
+    NgIf,
+    NgStyle,
   ],
   templateUrl: './models-list.component.html',
   styleUrl: './models-list.component.scss'
@@ -37,20 +43,20 @@ export class ModelsListComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private readonly globalService: GlobalService) { }
 
   ngOnInit() {
-    this.globalService.getModelsList().pipe(takeUntil(this.destroy$)).subscribe(list => {
-      this.modelsList = list;
-      this.allModels = list;
-    })
+    this.globalService.modelsList$.pipe(takeUntil(this.destroy$)).subscribe(modelsList => {
+      this.modelsList = modelsList;
+      this.allModels = modelsList;
+    });
   }
 
   ngOnChanges() {
     this.modelsList = this.filterList();
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+    ngOnDestroy() {
+      this.destroy$.next();
+      this.destroy$.complete();
+    }
 
   public changeActiveModel(model: Model3D): void {
     this.globalService.setActiveModel(model);

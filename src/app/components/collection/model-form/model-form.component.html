@@ -1,4 +1,4 @@
-<form [formGroup]="editionForm" (ngSubmit)="submitEdition()">
+<form [formGroup]="form">
   <mat-form-field>
     <label>Nom* :</label>
     <input matInput type="text" id="name" formControlName="name">
@@ -7,7 +7,7 @@
     <label>Auteur* :</label>
     <input matInput type="text" id="author" formControlName="author">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field *ngIf="!!form.controls['date']">
     <label>Publié le* :</label>
     <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -16,6 +16,10 @@
   <mat-form-field>
     <label>Polygones :</label>
     <input matInput type="number" id="polygons" formControlName="polygons">
+  </mat-form-field>
+  <mat-form-field *ngIf="!!form.controls['modelName']">
+    <label>Nom du fichier :</label>
+    <input matInput type="text" id="modelName" formControlName="modelName">
   </mat-form-field>
   <mat-form-field>
     <label>Description :</label>

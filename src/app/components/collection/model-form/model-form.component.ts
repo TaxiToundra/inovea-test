@@ -14,6 +14,7 @@ import {
 } from "@angular/material/datepicker";
 import { MatFormField } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-model-form',
@@ -25,16 +26,13 @@ import { MatInput } from "@angular/material/input";
     MatDatepickerToggle,
     MatFormField,
     MatInput,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './model-form.component.html',
   styleUrl: './model-form.component.scss'
 })
 export class ModelFormComponent {
   @Input()
-  public editionForm: FormGroup = new FormGroup([])
-
-  public submitEdition(): void {
-    console.log(this.editionForm?.value);
-  }
+  public form: FormGroup = new FormGroup([])
 }

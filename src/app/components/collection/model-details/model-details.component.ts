@@ -87,7 +87,10 @@ export class ModelDetailsComponent implements OnInit, OnDestroy {
   }
 
   public deleteModel(modelId: string): void {
-    this.globalService.deleteModel(modelId);
+    this.globalService.deleteModel(modelId).pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.globalService.setActiveModel(null);
+      this.globalService.updateModelList();
+    });
   }
 
   public toggleToEditionMode(): void {
@@ -95,8 +98,20 @@ export class ModelDetailsComponent implements OnInit, OnDestroy {
   }
 
   public editModel(): void {
-    this.globalService.updateModel(this.activeModel as Model3D);
-    this.toggleToEditionMode();
+    const updatedModel: Model3D = new Model3D(
+      this.activeModel?.id as string,
+      this.editionForm.controls['name'].value,
+      this.editionForm.controls['description'].value,
+      this.editionForm.controls['date'].value,
+      this.editionForm.controls['author'].value,
+      this.editionForm.controls['polygons'].value,
+      this.activeModel?.modelName as string
+    )
+    this.globalService.setActiveModel(updatedModel);
+    this.globalService.updateModel(updatedModel).pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.globalService.updateModelList();
+      this.toggleToEditionMode();
+    });
   }
 
   public cancelEdition(): void {

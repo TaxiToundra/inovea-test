@@ -27,12 +27,12 @@ export class Model3DModify {
   polygons: number;
   modelName: string;
 
-  constructor(model: Model3D) {
-    this.name = model.name;
-    this.description = model.description;
-    this.date = model.date;
-    this.author = model.author;
-    this.polygons = model.polygons;
-    this.modelName = model.modelName;
+  constructor(name: string, description: string, date: string, author: string, polygons: number, modelName: string) {
+    this.name = name;
+    this.description = description;
+    this.date = date;
+    this.author = author;
+    this.polygons = polygons;
+    this.modelName = modelName;
   }
 }

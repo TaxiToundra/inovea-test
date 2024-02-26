@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Ajouter un modèle 3D</h2>
+<mat-dialog-content>
+  <app-model-form [form]="creationForm"></app-model-form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="basic" (click)="closeDialog()">Annuler</button>
+  <button mat-flat-button color="basic" (click)="submit()" [disabled]="creationForm.invalid">Confirmer</button>
+</mat-dialog-actions>

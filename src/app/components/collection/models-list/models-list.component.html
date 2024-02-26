@@ -4,8 +4,8 @@
     <li *ngFor="let model of modelsList" (click)="changeActiveModel(model)">
       <span class="date-model">Date : {{ model.date | frenchDate }}</span>
       <mat-divider></mat-divider>
-      <div class="card-body">
-        <img [src]="'/assets/images/' + model.modelName + '.png'"  alt=""/>
+      <div class="card-body" [ngStyle]="{'height' : !model.modelName && 'auto'}">
+        <img *ngIf="!!model.modelName" [src]="'/assets/images/' + model.modelName + '.png'"  alt=""/>
         <span>{{ model.name }}</span>
       </div>
     </li>
