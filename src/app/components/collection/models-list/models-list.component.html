@@ -1,7 +1,7 @@
 
 <!-- Change the list with the real datas from API -->
 <ul>
-    <li *ngFor="let model of modelsList">
+    <li *ngFor="let model of modelsList" (click)="changeActiveModel(model)">
       <span class="date-model">Date : {{ model.date | frenchDate }}</span>
       <mat-divider></mat-divider>
       <div class="card-body">

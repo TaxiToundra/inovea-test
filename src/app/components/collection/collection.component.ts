@@ -1,5 +1,8 @@
 import { MatInputModule } from '@angular/material/input';
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnDestroy
+} from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
@@ -37,7 +40,7 @@ import { Model3D } from "../../models/model";
   templateUrl: './collection.component.html',
   styleUrl: './collection.component.scss'
 })
-export class CollectionComponent {
+export class CollectionComponent implements OnDestroy {
 
   modelName = new FormControl('');
   modelList: Model3D[] = [];
@@ -48,5 +51,10 @@ export class CollectionComponent {
     this.globalService.getModelsList().pipe(takeUntil(this.destroy$)).subscribe(list => {
       this.modelList = list;
     })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

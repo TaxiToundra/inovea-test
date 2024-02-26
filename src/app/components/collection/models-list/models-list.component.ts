@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit
 } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
@@ -25,7 +26,7 @@ import { FrenchDatePipe } from '../../../pipes/french-date.pipe';
   templateUrl: './models-list.component.html',
   styleUrl: './models-list.component.scss'
 })
-export class ModelsListComponent implements OnInit, OnChanges {
+export class ModelsListComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   public filterString: string | null = null;
 
@@ -44,6 +45,15 @@ export class ModelsListComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.modelsList = this.filterList();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  public changeActiveModel(model: Model3D): void {
+    this.globalService.setActiveModel(model);
   }
 
   private filterList(): Model3D[] {

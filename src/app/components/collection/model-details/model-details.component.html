@@ -1,1 +1,35 @@
-<p>model-details works!</p>
+<div *ngIf="activeModel; else noModelSelected" style="height: 100%">
+  <mat-card *ngIf="!isEditionMode; else editionMode">
+    <div class="card-header">
+      <h1>{{ activeModel.name }}</h1>
+      <h1>{{ activeModel.author }}</h1>
+    </div>
+    <mat-card-content>
+      <div class="picture-container">
+        <img [src]="'/assets/images/' + activeModel.modelName + '.png'"  alt=""/>
+      </div>
+      <div> <span class="bold">Publié le :</span> {{ activeModel.date | frenchDate }}</div>
+      <div> <span class="bold">Polygones :</span> {{ activeModel.polygons }}</div>
+      <div> <span class="bold">Description :</span> {{ activeModel.description }}</div>
+    </mat-card-content>
+    <mat-card-footer>
+      <button mat-flat-button color="basic" (click)="toggleToEditionMode()">Editer le modèle</button>
+      <button mat-flat-button color="warn" (click)="deleteModel(activeModel.id)">Supprimer le modèle</button>
+    </mat-card-footer>
+  </mat-card>
+  <ng-template #editionMode>
+    <mat-card>
+      <div class="card-header">
+        <h1>Edition du modèle {{ activeModel.name }}</h1>
+      </div>
+      <mat-card-content>
+        <app-model-form [editionForm]="editionForm"></app-model-form>
+      </mat-card-content>
+      <mat-card-footer>
+        <button mat-flat-button color="basic" (click)="cancelEdition()">Annuler</button>
+        <button mat-flat-button color="basic" (click)="editModel()">Confirmer</button>
+      </mat-card-footer>
+    </mat-card>
+  </ng-template>
+</div>
+<ng-template #noModelSelected>Pas de modèle selectionné</ng-template>

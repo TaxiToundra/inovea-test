@@ -1,9 +1,3 @@
-// Pick your choice of the following 2 options to define a model and fill it
-
-// export interface Model {
-// };
-
-
 export class Model3D {
   id: string;
   name: string;
@@ -22,5 +16,23 @@ export class Model3D {
     this.author = author;
     this.polygons = polygons;
     this.modelName = modelName;
+  }
+}
+
+export class Model3DModify {
+  name: string;
+  description: string;
+  date: string;
+  author: string;
+  polygons: number;
+  modelName: string;
+
+  constructor(model: Model3D) {
+    this.name = model.name;
+    this.description = model.description;
+    this.date = model.date;
+    this.author = model.author;
+    this.polygons = model.polygons;
+    this.modelName = model.modelName;
   }
 }

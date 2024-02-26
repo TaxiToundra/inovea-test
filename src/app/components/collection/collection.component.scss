@@ -28,15 +28,16 @@ mat-toolbar {
   flex-direction: row;
   justify-content: center;
   gap: 15px;
+  padding: 12px;
+
   .main-list-container {
     flex: 30%;
-    margin: 10px 0px;
     height: auto;
     max-width: 360px;
   }
+
   .model-container {
     flex: 65%;
-    margin: 10px 0px;
     border-radius: 10px;
   }
 }
